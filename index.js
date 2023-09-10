@@ -16,6 +16,7 @@ app.post("/",(req, res) => {
 
 //middlewares para páginas de error 404
 app.use(middlewares.notFound);
+app.use(middlewares.errorHandler);
 
 app.listen(3000, () => {
     console.log("SERVER corriendo en: http://localhost:3000");
