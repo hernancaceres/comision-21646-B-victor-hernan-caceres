@@ -6,3 +6,4 @@
 - git init
 - npm i express
 - npm i -D nodemon
+- npm i cors 

@@ -1,6 +1,6 @@
 const notFound = (req, res, next) => {
     res.status(404);
-    const error = new Error(`🔍 - Not Found error 404 - ${req.originalUrl}`);
+    const error = new Error(`🔍 - Not Found error 404 - ha intentado acceder a: ${req.originalUrl}`);
     next(error);
   };
 
