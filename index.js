@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require("express");
 const cors = require("cors");
 const middlewares = require('./middlewares');
@@ -11,7 +13,7 @@ app.use(express.json());
 //middlewares para habilitar otras aplicaciones para realizar solicitudes
 app.use(cors());
 //middlewares para traer las rutas
-app.use('/routes/posts', postsRouter);
+app.use('/', postsRouter);
 //middlewares para manejar páginas de error 404
 app.use(middlewares.notFound);
 //middlewares para manejar errores de la aplicación 

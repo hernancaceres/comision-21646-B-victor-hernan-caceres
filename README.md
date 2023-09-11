@@ -8,3 +8,5 @@
 - npm i -D nodemon
 - npm i cors 
 - npm i dotenv
+- npm i sequelize
+- npm i mysql2  
