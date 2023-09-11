@@ -7,3 +7,4 @@
 - npm i express
 - npm i -D nodemon
 - npm i cors 
+- npm i dotenv
