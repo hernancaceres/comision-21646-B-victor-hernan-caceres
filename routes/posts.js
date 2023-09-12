@@ -22,6 +22,18 @@ router.get("/", async (req, res) => {
 
 //crear post
 router.post("/", async (req, res) => {
+
+    try {
+        const article = await Post.create(req.body)
+        return res.status(201).json(article)
+    } catch (error) {
+        console.error(error)
+        return res.status(500).json({
+            message: 'Error Server'
+        })
+    }
+});
+/*
     const { titulo, contenido, imagen} = req.body;
 
     if (!titulo || !contenido) {
@@ -33,6 +45,7 @@ router.post("/", async (req, res) => {
     const article = await Post.create({ titulo, contenido, imagen });
     res.json(article);
 });
+*/
 
 //editar post
 router.put("/:id", async (req, res) => {
