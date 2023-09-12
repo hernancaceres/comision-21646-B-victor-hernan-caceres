@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const path=require("node:path")
 const express = require("express");
 const cors = require("cors");
 const db = require("./db/database");
@@ -11,6 +12,8 @@ const app = express();
 //INVOCAMOS AL MOTOR DE PLANTILLAS
 app.set("view engine","ejs");
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
 //conexion y autenticacion
 
 (async () => {
