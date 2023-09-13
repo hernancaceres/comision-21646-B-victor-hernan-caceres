@@ -4,12 +4,46 @@ document.addEventListener('click', (event) => {
     if (event.target.matches('#btn-delete')) {
         const card = event.target.closest('.card');
         const idArticle = card.dataset.id;
+
+        const confirmation = confirm('¿Estás seguro de que deseas eliminar este post?');
         
+        if (confirmation) {
+            fetch(`/delete/${idArticle}`, {
+                method: 'DELETE',
+            })
+            .then(res => {
+                if (res.status === 200) {
+                    card.remove(); // Elimina la tarjeta (card) del post del DOM
+                } else if (res.status === 404) {
+                    alert('Post no encontrado');
+                } else {
+                    alert('Error en el servidor');
+                }
+            })
+            .catch(err => {
+                console.error(err);
+            });
+        }
+    }
+});
+
+
+
+/*
+document.addEventListener('click', (event) => {
+    if (event.target.matches('#btn-delete')) {
+        console.log("Botón de eliminación clicado");
+        const card = event.target.closest('.card');
+        const idArticle = card.dataset.id;
+        console.log("ID del elemento a eliminar:", idArticle);
             fetch(`/delete/${idArticle}`, {
                 method: 'DELETE'
             }).then(res => {
+                console.log("Respuesta del servidor:", res.status);
                 if (res.ok) {
                     card.remove(); // Elimina la tarjeta (card) del post del DOM
+                    console.log("Elemento eliminado con éxito");
+                    location.reload();
                 }
             }).catch(err => {
                 console.error(err);
@@ -22,7 +56,7 @@ document.addEventListener('click', (event) => {
 
 
 
-/*
+
 document.addEventListener('click', (event) => {
     if (event.target.classList.contains('delete-btn')) {
         const postId = event.target.dataset.id;

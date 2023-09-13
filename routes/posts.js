@@ -163,7 +163,8 @@ router.delete("/delete/:id", async (req, res) => {
             });
         }
         // Redirige al usuario de vuelta a la página principal o a donde desees después de eliminar el post
-        res.redirect('/');
+        //res.redirect('/');
+        return res.sendStatus(200);
     } catch (error) {
         console.error(error);
         return res.status(500).json({

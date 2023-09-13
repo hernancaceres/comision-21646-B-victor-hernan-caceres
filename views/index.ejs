@@ -6,39 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CRUD</title>
 
-    //bootstrap
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
-    //BOXICONS
+
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
 
     <div class="container" id="contenedor">
-
-        <a href="/create" class="btn btn-primary"> <i class='bx bxs-plus-circle bx-md'></i></a>
-
-        <% article.forEach((user)=> { %>
-            <div class="card" style="width: 18rem;" data-id="<%= user.id %>"> <!-- Agrega el atributo "data-id" aquí -->
-                <img src="<%= user.imagen %>" class="card-img-top" alt="nombre">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <%= user.titulo %>Título
-                    </h5>
-                    <p class="card-text">
-                        <%= user.contenido %>Contenido
-                    </p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-                <a href="/edit/<%= user.id %>" class="btn btn-primary"> Editar</i></a>
-                <button type="button" class="btn btn-danger" id="btn-delete">Delete</button> <!-- Cambia el ID a una clase -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <a href="/create" class="btn btn-primary"><i class='bx bxs-plus-circle bx-md'></i> Click Aquí Para Crear
+                    Un Post</i></a>
             </div>
-        <% }) %>
-        
-    </div>
+            <% article.forEach((user)=> { %>
+                <div class="card" style="width: 18rem;" data-id="<%= user.id %>"
+                    class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <!-- Agrega el atributo "data-id" aquí -->
+                    <img src="<%= user.imagen %>" class="card-img-top" alt="nombre">
+                    <div class="card-body">
 
+                        <h5 class="card-title">
+                            <%= user.titulo %>
+                        </h5>
+                        <p class="card-text">
+                            <%= user.contenido %>
+                        </p>
+                        <p class="card-text">Fecha de Creación: <%= user.createdAt.toLocaleDateString() %>
+                        </p>
+                    </div>
+                    <a href="/edit/<%= user.id %>" class="btn btn-primary"> Editar</i></a>
+                    <button type="button" class="btn btn-danger" id="btn-delete">Delete</button>
+                    <!-- Cambia el ID a una clase -->
+                </div>
+                <% }) %>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>

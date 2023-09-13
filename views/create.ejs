@@ -16,45 +16,23 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                    </li>
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-        </div>
-    </nav>
-
     <div class="container">
 
-        <form action="/create" method="POST" >
+        <form action="/create" method="POST">
 
-            <h3>Posts</h3>
-            <input class="form-control" type="text" id="titulo" name="titulo">
-            <input class="form-control" type="text" id="contenido" name="contenido">
-            <input class="form-control" type="text" id="imagen" name="imagen">
-           
+            <h3>Creación de Post</h3>
+            
+            <input class="form-control" type="text" id="titulo" name="titulo" placeholder="Escribe el título del tema..."
+                required="true">
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label"></label>
+                <textarea class="form-control" type="text" id="contenido" name="contenido" rows="3"
+                    placeholder="Escribe la descripción del tema..." required="true"></textarea>
+            </div>
 
+            <input class="form-control" type="text" id="imagen" name="imagen"
+                placeholder="Escribe la url de la imagen que desees..." required="true">
+            <p></p>
             <button type="submit" class="btn btn-outline-primary">Guardar</button>
             <a href="/" class="btn btn-primary"> Cancelar</a>
         </form>

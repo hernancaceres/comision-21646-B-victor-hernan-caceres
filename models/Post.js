@@ -7,7 +7,9 @@ const Post =  db.define("Posts", {
     titulo: { type: DataTypes.STRING,allowNull: true},
     contenido: { type: DataTypes.STRING,allowNull: true },
     imagen: { type: DataTypes.STRING,allowNull: true },
-    
+}, {
+    // habilitar timestamps
+    timestamps: true,
 });
 
 module.exports = Post;
