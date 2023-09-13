@@ -4,6 +4,7 @@ const path=require("node:path")
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
+const helmet = require("helmet");
 const db = require("./db/database");
 const middlewares = require('./middlewares');
 const postsRouter = require('./routes/posts');
@@ -30,6 +31,16 @@ app.use(express.static(path.join(__dirname, "public")));
 //middlewares 
 app.use(express.json()); // para recibir información
 app.use(cors());//para habilitar otras aplicaciones para realizar solicitudes
+app.use(
+    helmet.contentSecurityPolicy({
+      directives: {
+        defaultSrc: ["'self'"], // Permitir cargas desde el mismo dominio (self)
+        imgSrc: ["'self'", '*'], // Permitir imágenes desde el mismo dominio y todos los dominios
+        //imgSrc: ["'self'", 'https://empresas.blogthinkbig.com'], // Permitir imágenes desde el mismo dominio y el dominio externo
+        scriptSrc: ["'self'", 'https://cdn.jsdelivr.net'], // Permitir scripts desde el mismo dominio y el dominio de CDN
+      },
+    })
+  );//previene ataques de inyección de contenido, como ataques de scripting entre sitios (XSS).
 app.use(morgan("tiny"));//retorna el método, la ruta, el tiempo para completar la petición y código http de respuesta
 app.use('/', postsRouter);//para traer las rutas
 
