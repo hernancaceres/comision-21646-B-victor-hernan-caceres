@@ -11,3 +11,4 @@
 - npm i sequelize
 - npm i mysql2  
 - npm i ejs
+- npm i morgan

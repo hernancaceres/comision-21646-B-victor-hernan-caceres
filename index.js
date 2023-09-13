@@ -3,6 +3,7 @@ require('dotenv').config();
 const path=require("node:path")
 const express = require("express");
 const cors = require("cors");
+const morgan = require("morgan");
 const db = require("./db/database");
 const middlewares = require('./middlewares');
 const postsRouter = require('./routes/posts');
@@ -29,7 +30,9 @@ app.use(express.static(path.join(__dirname, "public")));
 //middlewares 
 app.use(express.json()); // para recibir información
 app.use(cors());//para habilitar otras aplicaciones para realizar solicitudes
+app.use(morgan("tiny"));//retorna el método, la ruta, el tiempo para completar la petición y código http de respuesta
 app.use('/', postsRouter);//para traer las rutas
+
 app.use(middlewares.notFound);//para manejar páginas de error 404
 app.use(middlewares.errorHandler);//para manejar errores de la aplicación 
 
