@@ -4,9 +4,9 @@ const db = require("../db/database");
 
 //definimos el modelo
 const Post =  db.define("Posts", {
-    titulo: { type: DataTypes.STRING,},
-    contenido: { type: DataTypes.STRING },
-    imagen: { type: DataTypes.STRING },
+    titulo: { type: DataTypes.STRING,allowNull: true},
+    contenido: { type: DataTypes.STRING,allowNull: true },
+    imagen: { type: DataTypes.STRING,allowNull: true },
     
 });
 

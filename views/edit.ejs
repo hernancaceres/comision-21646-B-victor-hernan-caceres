@@ -1,1 +1,21 @@
-<h1>edit</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Post</title>
+</head>
+<body>
+    <h1>Editar Post</h1>
+    <form method="POST" action="/edit/<%= article.id %>"> <!-- Asegúrate de que article.id contenga el ID del post que se está editando -->
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" value="<%= article.titulo %>" required><br><br>
+        
+        <label for="contenido">Contenido:</label><br>
+        <textarea id="contenido" name="contenido" rows="4" cols="50" required><%= article.contenido %></textarea><br><br>
+        
+        <label for="imagen">Imagen:</label>
+        <input type="text" id="imagen" name="imagen" value="<%= article.imagen %>"><br><br>
+        
+        <button type="submit">Guardar Cambios</button>
+    </form>
+</body>
+</html>

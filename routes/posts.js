@@ -11,7 +11,6 @@ router.get("/", async (req, res) => {
         //return res.status(200).json(article)
         res.render('index', { article }); // Renderiza la vista "index.ejs" y pasa datos como "articles"
 
-
     } catch (error) {
         console.error(error)
         return res.status(500).json({
@@ -19,13 +18,9 @@ router.get("/", async (req, res) => {
         })
     }
 
-
 });
 
-
-
 //crear post
-
 // Ruta para mostrar el formulario de creación y manejar la creación del post
 router.route("/create")
     .get((req, res) => {
@@ -39,8 +34,7 @@ router.route("/create")
                 contenido: req.body.contenido,
                 imagen: req.body.imagen,
             });
-            // Redirige al usuario a una página de éxito o a donde desees después de crear el post
-            res.redirect('/create'); // Puedes redirigirlo nuevamente a la página de creación o a otra vista
+            res.redirect('/'); // Redirige al usuario a una página de inicio
         } catch (error) {
             console.error(error)
             return res.status(500).json({
@@ -48,31 +42,11 @@ router.route("/create")
             });
         }
     });
-
-
-/*router.post("/create", async (req, res) => {
-
-    try {
-        const article = await Post.create({
-            titulo: req.body.titulo,
-            contenido: req.body.contenido,
-            imagen: req.body.imagen,
-        });
-        //const article = await Post.create(req.body);
-        //return res.status(201).json(article)
-        res.render('create'); // Renderiza la vista "create.ejs"
-    } catch (error) {
-        console.error(error)
-        return res.status(500).json({
-            message: 'Error Server'
-        })
-    }
-});*/
-
 // Para renderizar la vista "create.ejs" en la ruta '/create'
 router.get("/edit", (req, res) => {
     res.render('edit'); // Renderiza la vista "create.ejs"
 });
+
 
 //editar post
 // Editar post (mostrar formulario de edición)
@@ -85,7 +59,6 @@ router.get("/edit/:id", async (req, res) => {
                 message: 'Post no encontrado'
             });
         }
-
         res.render('edit', { article }); // Renderiza la vista "edit.ejs" y pasa el artículo a editar
     } catch (error) {
         console.error(error);
@@ -94,6 +67,32 @@ router.get("/edit/:id", async (req, res) => {
         });
     }
 });
+
+// Ruta para procesar la edición del post
+router.post("/edit/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+        const article = await Post.findByPk(id);
+        if (!article) {
+            return res.status(404).json({
+                message: 'Post no encontrado'
+            });
+        }
+
+        // Actualiza los datos del post con los valores del formulario
+        article.update(req.body);
+
+        // Redirige al usuario a la página de detalles del post u otra vista apropiada
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            message: 'Error Server'
+        });
+    }
+});
+
+/*
 
 // Actualizar post (manejar el formulario de edición)
 router.put("/:id", async (req, res) => {
@@ -120,31 +119,60 @@ router.put("/:id", async (req, res) => {
 });
 
 
-//eliminar post
-router.delete("/:id", async (req, res) => {
 
-    const { id } = req.params
+//eliminar post
+// Ruta para eliminar un post por su ID
+router.delete("/:id", async (req, res) => {
+    const { id } = req.params;
     try {
         const articleDeleted = await Post.destroy({
             where: {
                 id: id
             }
-        })
+        });
         if (!articleDeleted) {
             return res.status(404).json({
                 message: 'Post no encontrado'
-            })
+            });
         }
-        return res.status(200).json({
-            message: 'Post eliminado'
-        })
+        // Redirige al usuario de vuelta a la página principal o a donde desees después de eliminar el post
+        res.redirect('/');
     } catch (error) {
-        console.error(error)
+        console.error(error);
         return res.status(500).json({
             message: 'Error Server'
-        })
+        });
     }
-
 });
+
+*/
+
+
+// Ruta para eliminar un post por su ID
+router.delete("/delete/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+        const articleDeleted = await Post.destroy({
+            where: {
+                id: id
+            }
+        });
+        if (!articleDeleted) {
+            return res.status(404).json({
+                message: 'Post no encontrado'
+            });
+        }
+        // Redirige al usuario de vuelta a la página principal o a donde desees después de eliminar el post
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            message: 'Error Server'
+        });
+    }
+});
+
+
+
 
 module.exports = router;
