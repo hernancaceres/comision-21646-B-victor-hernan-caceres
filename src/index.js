@@ -47,7 +47,7 @@ app.use('/', postsRouter);//para traer las rutas
 app.use(middlewares.notFound);//para manejar páginas de error 404
 app.use(middlewares.errorHandler);//para manejar errores de la aplicación 
 
-const port = 3000
-app.listen(3000, () => {
-    console.log("SERVER corriendo en: http://localhost:3000");
+const port = 3001
+app.listen(3001, () => {
+    console.log("SERVER corriendo en: http://localhost:3001");
 });
